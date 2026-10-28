@@ -1,0 +1,34 @@
+{
+  "name": "mindmatter",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Mind Matter \u2014 immersive, interactive science experiences for the curious.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "verify:ui": "vite-node scripts/verify-ui.mts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chamithkcc40-svg/mindmatter.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.5"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^30.0.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "jsdom": "^30.1.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vite-node": "^6.0.0"
+  }
+}
