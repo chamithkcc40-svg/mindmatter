@@ -1,0 +1,320 @@
+@import "tailwindcss";
+
+/* ---------- Design tokens ---------- */
+:root {
+  --page: #08080b;
+  --page-2: #0d0d12;
+  --ink: #f2f2f5;
+  --ink-2: rgba(242, 242, 245, 0.6);
+  --ink-3: rgba(242, 242, 245, 0.38);
+  --line: rgba(255, 255, 255, 0.09);
+  --line-soft: rgba(255, 255, 255, 0.055);
+  --panel: rgba(18, 18, 23, 0.62);
+  --panel-solid: #121217;
+  --field: rgba(255, 255, 255, 0.045);
+  --accent: #5ea0ff;
+  --accent-ink: #9cc4ff;
+  --accent-soft: rgba(94, 160, 255, 0.14);
+  --shadow: rgba(0, 0, 0, 0.45);
+  --track: rgba(255, 255, 255, 0.14);
+  --chip: rgba(255, 255, 255, 0.06);
+  color-scheme: dark;
+}
+
+body.light {
+  --page: #e9e9ee;
+  --page-2: #f4f4f7;
+  --ink: #15151a;
+  --ink-2: rgba(21, 21, 26, 0.62);
+  --ink-3: rgba(21, 21, 26, 0.4);
+  --line: rgba(10, 10, 20, 0.12);
+  --line-soft: rgba(10, 10, 20, 0.06);
+  --panel: rgba(255, 255, 255, 0.66);
+  --panel-solid: #ffffff;
+  --field: rgba(10, 10, 20, 0.045);
+  --accent: #0066e0;
+  --accent-ink: #0a59c9;
+  --accent-soft: rgba(0, 102, 224, 0.1);
+  --shadow: rgba(30, 30, 60, 0.16);
+  --track: rgba(10, 10, 20, 0.16);
+  --chip: rgba(10, 10, 20, 0.05);
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--page);
+  color: var(--ink);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(94, 160, 255, 0.32);
+}
+
+/* ---------- Typography helpers ---------- */
+.micro-label {
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+.display-tight {
+  letter-spacing: -0.045em;
+}
+
+.mono {
+  font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas,
+    monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Glass panel (UI chrome only — the demo glass is WebGL) ---------- */
+.ui-panel {
+  background: var(--panel);
+  backdrop-filter: blur(22px) saturate(1.5);
+  -webkit-backdrop-filter: blur(22px) saturate(1.5);
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 70px -30px var(--shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+body.light .ui-panel {
+  box-shadow: 0 24px 60px -28px var(--shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.ui-chip {
+  background: var(--chip);
+  border: 1px solid var(--line-soft);
+}
+
+/* ---------- Range slider ---------- */
+input[type="range"].lab-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 22px;
+  background: transparent;
+  cursor: pointer;
+  --fill: 50%;
+}
+
+input[type="range"].lab-slider::-webkit-slider-runnable-track {
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--accent) 0%,
+    var(--accent) var(--fill),
+    var(--track) var(--fill),
+    var(--track) 100%
+  );
+}
+
+input[type="range"].lab-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: none;
+  margin-top: -5.5px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s ease;
+}
+
+input[type="range"].lab-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.18);
+}
+
+input[type="range"].lab-slider::-moz-range-track {
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--accent) 0%,
+    var(--accent) var(--fill),
+    var(--track) var(--fill),
+    var(--track) 100%
+  );
+}
+
+input[type="range"].lab-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------- Toggle switch ---------- */
+.lab-toggle {
+  position: relative;
+  width: 34px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--track);
+  transition: background 0.25s ease;
+  flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.lab-toggle::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--ink);
+  transition: transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.lab-toggle[data-on="true"] {
+  background: var(--accent);
+}
+
+.lab-toggle[data-on="true"]::after {
+  transform: translateX(14px);
+  background: #fff;
+}
+
+/* ---------- Segmented control ---------- */
+.lab-segmented {
+  display: inline-flex;
+  padding: 3px;
+  gap: 2px;
+  border-radius: 12px;
+  background: var(--field);
+  border: 1px solid var(--line-soft);
+}
+
+.lab-segmented button {
+  border-radius: 9px;
+  padding: 5px 12px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.lab-segmented button[data-active="true"] {
+  background: var(--panel-solid);
+  color: var(--ink);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.22), 0 0 0 1px var(--line-soft);
+}
+
+/* ---------- Preset pills ---------- */
+.preset-pill {
+  position: relative;
+  border-radius: 14px;
+  padding: 9px 15px;
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  color: var(--ink-2);
+  background: var(--chip);
+  border: 1px solid var(--line-soft);
+  transition: all 0.25s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.preset-pill:hover {
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+.preset-pill[data-active="true"] {
+  color: var(--ink);
+  background: var(--accent-soft);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+/* ---------- Icon button ---------- */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  color: var(--ink-2);
+  background: var(--chip);
+  border: 1px solid var(--line-soft);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+/* ---------- Scrollbar ---------- */
+.lab-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.lab-scroll::-webkit-scrollbar-thumb {
+  background: var(--track);
+  border-radius: 999px;
+}
+.lab-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---------- Canvas containers ---------- */
+.gl-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  outline: none;
+}
+
+canvas.gl-canvas {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---------- Animations ---------- */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .rise {
+    animation: none;
+  }
+}
