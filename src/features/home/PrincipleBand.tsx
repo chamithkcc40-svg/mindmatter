@@ -35,7 +35,13 @@ export function PrincipleBand() {
 
         <ol className="principles__list">
           {PRINCIPLES.map((item, index) => (
-            <Reveal as="li" key={item.index} delay={index * 90} className="principles__item">
+            <Reveal
+              as="li"
+              key={item.index}
+              delay={index * 90}
+              className="principles__item"
+              surface="row"
+            >
               <span className="principles__index">{item.index}</span>
               <h3 className="principles__title">{item.title}</h3>
               <p className="principles__body">{item.body}</p>

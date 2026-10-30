@@ -190,9 +190,12 @@ button {
 
 /* Buttons ---------------------------------------------------------------- */
 
+/*
+  Glass buttons have no painted body: the liquid glass renderer draws the
+  surface (see src/styles/liquid-glass.css). CSS keeps the box, the type and
+  the motion, and sets the ink so contrast holds over the refracted field.
+*/
 .btn {
-  --btn-bg: transparent;
-  --btn-fg: var(--ink);
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -201,16 +204,14 @@ button {
   min-height: 48px;
   padding: 0.8rem 1.5rem;
   border-radius: var(--radius-pill);
-  background: var(--btn-bg);
-  color: var(--btn-fg);
+  background: none;
+  color: var(--ink);
   font-size: 0.94rem;
   font-weight: 540;
   letter-spacing: -0.005em;
   border: 1px solid transparent;
   transition: transform var(--dur-fast) var(--ease-out),
-    background-color var(--dur) var(--ease-out),
-    border-color var(--dur) var(--ease-out),
-    box-shadow var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
+    color var(--dur) var(--ease-out);
   isolation: isolate;
   white-space: nowrap;
 }
@@ -220,34 +221,21 @@ button {
 }
 
 .btn:active {
-  transform: translateY(0);
+  transform: translateY(1px);
 }
 
+/* Lit accent glass — the shader emits the blue surface, ink stays dark. */
 .btn--primary {
-  background: linear-gradient(135deg, #5f9cff 0%, #4d7dff 46%, #7f6bff 100%);
-  color: #050a16;
-  font-weight: 620;
-  box-shadow: 0 12px 34px -16px rgba(77, 141, 255, 0.9),
-    0 1px 0 rgba(255, 255, 255, 0.5) inset;
-  border-color: rgba(190, 220, 255, 0.4);
-}
-
-.btn--primary:hover {
-  box-shadow: 0 18px 44px -16px rgba(105, 150, 255, 1),
-    0 1px 0 rgba(255, 255, 255, 0.6) inset;
-  filter: brightness(1.05);
+  color: #04070f;
+  font-weight: 640;
 }
 
 .btn--ghost {
-  border-color: var(--line-strong);
-  background: rgba(255, 255, 255, 0.025);
   color: var(--ink);
-  backdrop-filter: blur(10px);
 }
 
 .btn--ghost:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(180, 208, 255, 0.42);
+  color: #ffffff;
 }
 
 .btn--quiet {
@@ -255,13 +243,10 @@ button {
   padding: 0.5rem 0.95rem;
   font-size: 0.86rem;
   color: var(--ink-2);
-  border-color: var(--line);
-  background: rgba(255, 255, 255, 0.02);
 }
 
 .btn--quiet:hover {
   color: var(--ink);
-  border-color: var(--line-strong);
 }
 
 .btn__icon {
@@ -288,21 +273,18 @@ button {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-2);
-  border: 1px solid var(--line);
+  border: 1px solid transparent;
   border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.03);
+  background: none;
   white-space: nowrap;
 }
 
 .chip--live {
-  color: #bff3ff;
-  border-color: rgba(95, 228, 255, 0.34);
-  background: rgba(43, 154, 190, 0.14);
+  color: #c9f5ff;
 }
 
 .chip--soon {
   color: var(--ink-muted);
-  border-style: dashed;
 }
 
 .dot {
@@ -367,7 +349,7 @@ button {
   inset: 0;
   pointer-events: none;
   z-index: 5;
-  opacity: 0.028;
+  opacity: 0.018;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 

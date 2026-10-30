@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { SolarSystemCanvas } from '../solar-system/SolarSystemCanvas';
 import { Reveal } from '../../components/Reveal';
+import { LiquidGlassLayer } from '../../liquid-glass';
 import { ArrowRight, Info, Orbit } from '../../components/icons';
 import { PLANETS } from '../../data/planets';
 
@@ -35,6 +36,7 @@ export function FeaturedExperience() {
           <Link
             to="/explore/solar-system"
             className="featured-card"
+            data-lg="panel"
           >
             <div className="featured-card__stage">
               <SolarSystemCanvas
@@ -49,15 +51,25 @@ export function FeaturedExperience() {
               />
               <div className="featured-card__scrim" aria-hidden="true" />
 
+              {/* Glass above the simulator artwork lives in its own region layer. */}
+              <LiquidGlassLayer layer="featured" mode="region" />
+
               <div className="featured-card__badges">
-                <span className="chip chip--live">
+                <span className="chip chip--live" data-lg="chip" data-lg-layer="featured">
                   <span className="dot" />
                   Interactive
                 </span>
-                <span className="chip">Educational simulation</span>
+                <span className="chip" data-lg="chip" data-lg-layer="featured">
+                  Educational simulation
+                </span>
               </div>
 
-              <ol className="featured-card__legend" aria-label="Planets shown, in order from the Sun">
+              <ol
+                className="featured-card__legend"
+                aria-label="Planets shown, in order from the Sun"
+                data-lg="pill"
+                data-lg-layer="featured"
+              >
                 {PLANETS.map((planet) => (
                   <li key={planet.id}>
                     <span
@@ -100,7 +112,7 @@ export function FeaturedExperience() {
               </div>
 
               <div className="featured-card__action">
-                <span className="featured-card__cta">
+                <span className="featured-card__cta" data-lg="primary">
                   Enter Solar System
                   <ArrowRight className="btn__icon" />
                 </span>

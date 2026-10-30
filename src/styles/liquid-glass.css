@@ -1,0 +1,162 @@
+/* ==========================================================================
+   Liquid glass — WebGL surface system
+   --------------------------------------------------------------------------
+   The glass itself is rendered by src/liquid-glass (WebGL2 + GLSL): refraction
+   of the procedural deep-space field, Fresnel reflections, dispersion, rim
+   light and Beer–Lambert absorption. CSS here only positions the layers,
+   removes the painted backgrounds a glass surface must not have, and supplies
+   an opaque crystal fallback when WebGL2 is unavailable.
+
+   There is deliberately no `backdrop-filter` anywhere in this project: blur is
+   not refraction, and frosted panels are glassmorphism, not glass.
+   ========================================================================== */
+
+:root {
+  /* Corner radii shared by CSS and the shader presets. */
+  --lg-r-row: 18px;
+  --lg-r-plate: 20px;
+  --lg-r-card: 22px;
+  --lg-r-panel: 26px;
+  --lg-r-sheet: 28px;
+
+  /* Screen-space accent light used by the field shader. */
+  --lg-key: #d6e4ff;
+}
+
+/* ------------------------------------------------------------------ layers */
+
+.lg-layer {
+  display: block;
+  pointer-events: none;
+  touch-action: none;
+}
+
+/* The living backdrop: field + in-flow glass, painted behind the document. */
+.lg-layer--backdrop {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/*
+  Page chrome that must float above content (nav dock, mobile sheet).
+  The header itself is `z-index: 100`; this canvas sits under it so the dock's
+  labels and the sheet's copy paint crisply over their own glass. Because that
+  also means nothing inside the header can paint *behind* the glass, chrome
+  surfaces must stay free of painted backgrounds — the shader owns their body.
+*/
+.lg-layer--overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 98;
+}
+
+/* Glass that sits above a region's own artwork (explorer stage, simulator). */
+.lg-layer--region {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+/* Everything the user reads or clicks paints above the backdrop glass. */
+.app > main {
+  position: relative;
+  z-index: 2;
+}
+
+/* --------------------------------------------------------------- surfaces */
+
+/*
+  A glass surface never paints its own body: the shader does.
+  Hairline borders survive because the rule that generated the old frosted look
+  always paired a translucent fill with a visible outline; without the fill the
+  outline still helps crisp, high-contrast labelling on top of the shader, so
+  only the background and drop shadow are neutralised here.
+*/
+[data-lg] {
+  background: none;
+  box-shadow: none;
+}
+
+/* ---------------------------------------------------------------- fallback */
+
+/*
+  No WebGL2 (or the shader failed): polished crystal.
+  Fully opaque, no blur, no translucent-white panels — the refraction is
+  replaced by a brushed, specular-lit solid so contrast never depends on it.
+*/
+html.lg-fallback [data-lg] {
+  background:
+    linear-gradient(
+      158deg,
+      rgba(30, 41, 66, 0.99) 0%,
+      rgba(12, 18, 32, 0.995) 46%,
+      rgba(6, 10, 19, 1) 100%
+    );
+  border: 1px solid rgba(150, 182, 236, 0.2);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.55),
+    0 22px 60px -42px rgba(0, 0, 0, 0.95);
+}
+
+html.lg-fallback [data-lg="chip"],
+html.lg-fallback [data-lg="pill"] {
+  background: linear-gradient(
+    150deg,
+    rgba(34, 46, 74, 0.98) 0%,
+    rgba(11, 17, 30, 0.99) 100%
+  );
+}
+
+html.lg-fallback [data-lg="button"] {
+  background: linear-gradient(
+    150deg,
+    rgba(38, 51, 82, 0.98) 0%,
+    rgba(12, 18, 32, 0.99) 100%
+  );
+}
+
+html.lg-fallback [data-lg="primary"] {
+  background:
+    radial-gradient(120% 160% at 18% 0%, rgba(255, 255, 255, 0.5), transparent 46%),
+    linear-gradient(140deg, #7fb0ff 0%, #5d8bff 48%, #8f7bff 100%);
+  border-color: rgba(206, 228, 255, 0.6);
+  color: #04070f;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    0 16px 40px -22px rgba(88, 146, 255, 0.8);
+}
+
+html.lg-fallback .hero__plate-orb {
+  box-shadow: 0 0 18px rgba(120, 170, 255, 0.55);
+}
+
+/* The fallback still needs a page background (the field canvas is absent). */
+html.lg-fallback body {
+  background:
+    radial-gradient(90% 60% at 78% 2%, rgba(40, 70, 140, 0.5), transparent 62%),
+    radial-gradient(60% 50% at 6% 18%, rgba(86, 66, 156, 0.28), transparent 66%),
+    radial-gradient(70% 50% at 40% 100%, rgba(24, 78, 110, 0.24), transparent 70%),
+    linear-gradient(180deg, #05070e 0%, #070b14 46%, #03050b 100%);
+}
+
+/* ------------------------------------------------- reduced motion / contrast */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-lg] {
+    transition: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  html:not(.lg-fallback) .feature-card__blurb,
+  html:not(.lg-fallback) .muted {
+    color: #cfd8e8;
+  }
+}

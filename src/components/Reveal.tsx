@@ -1,4 +1,5 @@
 import { useEffect, useRef, type ElementType, type ReactNode } from 'react';
+import type { GlassVariant } from '../liquid-glass';
 
 interface RevealProps {
   children: ReactNode;
@@ -7,6 +8,10 @@ interface RevealProps {
   as?: ElementType;
   className?: string;
   id?: string;
+  /** Render this element as a liquid glass surface. */
+  surface?: GlassVariant;
+  /** Glass layer that owns the surface (defaults to the page backdrop). */
+  surfaceLayer?: string;
 }
 
 /**
@@ -19,6 +24,8 @@ export function Reveal({
   as: Tag = 'div',
   className = '',
   id,
+  surface,
+  surfaceLayer,
 }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null);
 
@@ -52,6 +59,8 @@ export function Reveal({
       ref={ref}
       id={id}
       className={`reveal ${className}`.trim()}
+      data-lg={surface}
+      data-lg-layer={surfaceLayer}
       style={{ '--reveal-delay': `${delay}ms` } as React.CSSProperties}
     >
       {children}

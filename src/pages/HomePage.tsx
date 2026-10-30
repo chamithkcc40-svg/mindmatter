@@ -42,7 +42,7 @@ export function HomePage() {
               More experiences are in production. The Solar System Explorer is the
               first of them — and it is fully working today.
             </p>
-            <Link className="btn btn--ghost" to="/explore">
+            <Link className="btn btn--ghost" to="/explore" data-lg="button">
               Browse all experiences
               <ArrowRight className="btn__icon" />
             </Link>
@@ -53,8 +53,7 @@ export function HomePage() {
       <PrincipleBand />
 
       <section className="section closing" aria-labelledby="closing-title">
-        <div className="shell closing__inner">
-          <div className="closing__glow" aria-hidden="true" />
+        <div className="shell closing__inner" data-lg="panel">
           <Reveal className="closing__content">
             <p className="eyebrow">Begin anywhere</p>
             <h2 id="closing-title" className="h2 closing__title">
@@ -65,11 +64,11 @@ export function HomePage() {
               learn why every world out there behaves the way it does.
             </p>
             <div className="closing__actions">
-              <Link className="btn btn--primary" to="/explore/solar-system">
+              <Link className="btn btn--primary" to="/explore/solar-system" data-lg="primary">
                 Explore the Universe
                 <ArrowRight className="btn__icon" />
               </Link>
-              <Link className="btn btn--ghost" to="/about">
+              <Link className="btn btn--ghost" to="/about" data-lg="button">
                 About Mind Matter
               </Link>
             </div>

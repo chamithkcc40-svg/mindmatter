@@ -47,7 +47,7 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          <div className="site-footer__col site-footer__col--wide">
+          <div className="site-footer__col site-footer__col--wide" data-lg="plate">
             <h2 className="site-footer__heading">Start exploring</h2>
             <p className="site-footer__note">
               The Solar System Explorer runs entirely in your browser. No accounts,

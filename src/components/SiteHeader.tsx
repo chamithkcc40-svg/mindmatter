@@ -77,7 +77,12 @@ export function SiteHeader() {
 
   return (
     <header className={`site-header${scrolled ? ' is-scrolled' : ''}`}>
-      <div className="shell site-header__inner">
+      <div
+        className="shell site-header__inner"
+        data-lg="bar"
+        data-lg-layer="chrome"
+        data-lg-radius="999"
+      >
         <Link to="/" className="site-header__brand" aria-label="Mind Matter — home">
           <Wordmark size={30} />
         </Link>
@@ -93,7 +98,19 @@ export function SiteHeader() {
                     `site-nav__link${isActive ? ' is-active' : ''}`
                   }
                 >
-                  {link.label}
+                  {({ isActive }) => (
+                    <>
+                      {isActive ? (
+                        <span
+                          className="site-nav__bead"
+                          data-lg="chip"
+                          data-lg-layer="chrome"
+                          aria-hidden="true"
+                        />
+                      ) : null}
+                      <span className="site-nav__label">{link.label}</span>
+                    </>
+                  )}
                 </NavLink>
               </li>
             ))}
@@ -101,7 +118,12 @@ export function SiteHeader() {
         </nav>
 
         <div className="site-header__actions">
-          <Link className="btn btn--primary site-header__cta" to="/explore/solar-system">
+          <Link
+            className="btn btn--primary site-header__cta"
+            to="/explore/solar-system"
+            data-lg="primary"
+            data-lg-layer="chrome"
+          >
             Explore Solar System
             <ArrowRight className="btn__icon" />
           </Link>
@@ -112,6 +134,8 @@ export function SiteHeader() {
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             onClick={() => setMenuOpen((open) => !open)}
+            data-lg="button"
+            data-lg-layer="chrome"
           >
             {menuOpen ? <Close width={20} height={20} /> : <Menu width={20} height={20} />}
             <span className="visually-hidden">
@@ -126,6 +150,9 @@ export function SiteHeader() {
         ref={menuRef}
         className={`mobile-menu${menuOpen ? ' is-open' : ''}`}
         hidden={!menuOpen}
+        data-lg="sheet"
+        data-lg-layer="chrome"
+        data-lg-radius="26"
       >
         <nav aria-label="Mobile">
           <ul className="mobile-menu__list">
@@ -145,7 +172,12 @@ export function SiteHeader() {
             ))}
           </ul>
         </nav>
-        <Link className="btn btn--primary mobile-menu__cta" to="/explore/solar-system">
+        <Link
+          className="btn btn--primary mobile-menu__cta"
+          to="/explore/solar-system"
+          data-lg="primary"
+          data-lg-layer="chrome"
+        >
           Explore Solar System
           <ArrowRight className="btn__icon" />
         </Link>

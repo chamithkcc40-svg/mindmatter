@@ -23,7 +23,8 @@
   --violet: #9a7bff;
   --amber: #ffcf8b;
 
-  /* Surfaces & lines */
+  /* Surfaces & lines
+     Hairlines only — surface bodies come from the liquid glass renderer. */
   --line: rgba(148, 176, 226, 0.14);
   --line-strong: rgba(160, 190, 240, 0.26);
   --glass: rgba(11, 18, 33, 0.62);

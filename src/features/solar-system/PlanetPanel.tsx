@@ -88,7 +88,12 @@ export function PlanetPanel({ planet, onClear, onSelect }: PlanetPanelProps) {
       <div className="planet-panel__head">
         <div className="planet-panel__head-row">
           <p className="eyebrow">Planet {String(planet.order).padStart(2, '0')}</p>
-          <button type="button" className="planet-panel__close" onClick={onClear}>
+          <button
+            type="button"
+            className="planet-panel__close"
+            onClick={onClear}
+            data-lg="chip"
+          >
             <Close width={15} height={15} />
             Full system
           </button>
@@ -158,6 +163,7 @@ export function PlanetPanel({ planet, onClear, onSelect }: PlanetPanelProps) {
           className="btn btn--quiet"
           onClick={() => onSelect(previous.id)}
           aria-label={`Previous planet: ${previous.name}`}
+          data-lg="button"
         >
           <ArrowLeft width={15} height={15} />
           {previous.name}
@@ -167,6 +173,7 @@ export function PlanetPanel({ planet, onClear, onSelect }: PlanetPanelProps) {
           className="btn btn--quiet"
           onClick={() => onSelect(next.id)}
           aria-label={`Next planet: ${next.name}`}
+          data-lg="button"
         >
           {next.name}
           <ArrowRight width={15} height={15} />

@@ -10,10 +10,6 @@ export function ScienceLibraryPage() {
 
   return (
     <div className="page">
-      <div className="page__ambient" aria-hidden="true">
-        <div className="page__nebula" />
-      </div>
-
       <section className="page-hero">
         <div className="shell">
           <Reveal>
@@ -45,7 +41,13 @@ export function ScienceLibraryPage() {
           </Reveal>
 
           <Reveal delay={80}>
-            <div className="table-wrap" tabIndex={0} role="region" aria-label="Planetary data sheet, scrollable">
+            <div
+              className="table-wrap"
+              tabIndex={0}
+              role="region"
+              aria-label="Planetary data sheet, scrollable"
+              data-lg="panel"
+            >
               <table className="data-table">
                 <caption className="visually-hidden">
                   Mean planetary data for the eight planets of the solar system
@@ -95,7 +97,7 @@ export function ScienceLibraryPage() {
               Prefer to learn by doing? Open the explorer and see these numbers in
               motion.
             </p>
-            <Link className="btn btn--ghost" to="/explore/solar-system">
+            <Link className="btn btn--ghost" to="/explore/solar-system" data-lg="button">
               Open the Solar System Explorer
               <ArrowRight className="btn__icon" />
             </Link>
@@ -105,7 +107,7 @@ export function ScienceLibraryPage() {
 
       <section className="section section--tight" aria-labelledby="videos-title">
         <div className="shell">
-          <Reveal className="coming-panel">
+          <Reveal className="coming-panel" surface="panel">
             <div className="coming-panel__icon" aria-hidden="true">
               <Play width={20} height={20} />
             </div>

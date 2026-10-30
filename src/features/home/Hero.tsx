@@ -1,23 +1,18 @@
 import { Link } from 'react-router-dom';
-import { Starfield } from '../../components/visuals/Starfield';
 import { CelestialVisual } from '../../components/visuals/CelestialVisual';
 import { ArrowDown, ArrowRight, Play } from '../../components/icons';
 
 export function Hero() {
   return (
     <section className="hero" aria-labelledby="hero-title">
-      <div className="hero__ambient" aria-hidden="true">
-        <div className="hero__stars">
-          <Starfield density={1.05} maxStars={240} />
-        </div>
-        <div className="hero__nebula hero__nebula--one" />
-        <div className="hero__nebula hero__nebula--two" />
-        <div className="hero__horizon" />
-      </div>
-
       <div className="shell hero__inner">
         <div className="hero__copy">
-          <p className="hero__eyebrow anim-rise" style={{ '--d': '0ms' } as React.CSSProperties}>
+          <p
+            className="hero__eyebrow anim-rise"
+            data-lg="chip"
+            data-lg-radius="999"
+            style={{ '--d': '0ms' } as React.CSSProperties}
+          >
             <span className="dot" />
             Interactive science studio
           </p>
@@ -40,15 +35,33 @@ export function Hero() {
           </p>
 
           <div className="hero__actions anim-rise" style={{ '--d': '400ms' } as React.CSSProperties}>
-            <Link className="btn btn--primary" to="/explore/solar-system">
+            <Link className="btn btn--primary" to="/explore/solar-system" data-lg="primary">
               Explore the Universe
               <ArrowRight className="btn__icon" />
             </Link>
-            <a className="btn btn--ghost" href="#experiences">
+            <a className="btn btn--ghost" href="#experiences" data-lg="button">
               <Play className="btn__icon" />
               Discover Science
             </a>
           </div>
+
+          <Link
+            to="/explore/solar-system"
+            className="hero__plate anim-rise"
+            data-lg="plate"
+            style={{ '--d': '470ms' } as React.CSSProperties}
+          >
+            <span className="hero__plate-orb" aria-hidden="true" />
+            <span className="hero__plate-copy">
+              <span className="hero__plate-label">Now exploring</span>
+              <strong>Live Solar System</strong>
+              <span className="hero__plate-meta">Eight worlds in motion</span>
+            </span>
+            <span className="hero__plate-link">
+              Enter
+              <ArrowRight width={14} height={14} />
+            </span>
+          </Link>
 
           <dl className="hero__meta anim-rise" style={{ '--d': '520ms' } as React.CSSProperties}>
             <div>
@@ -69,15 +82,6 @@ export function Hero() {
         <div className="hero__visual anim-fade" style={{ '--d': '260ms' } as React.CSSProperties}>
           <div className="hero__visual-mask">
             <CelestialVisual />
-          </div>
-          <div className="hero__plate glass-panel">
-            <span className="hero__plate-label">Now exploring</span>
-            <strong>Live Solar System</strong>
-            <span className="hero__plate-meta">Eight worlds in motion</span>
-            <Link to="/explore/solar-system" className="hero__plate-link">
-              Enter
-              <ArrowRight width={14} height={14} />
-            </Link>
           </div>
         </div>
       </div>

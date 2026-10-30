@@ -10,10 +10,6 @@ export function ExplorePage() {
 
   return (
     <div className="page">
-      <div className="page__ambient" aria-hidden="true">
-        <div className="page__nebula" />
-      </div>
-
       <section className="page-hero">
         <div className="shell">
           <Reveal>
@@ -51,7 +47,7 @@ export function ExplorePage() {
 
       <section className="section section--tight" aria-labelledby="live-now">
         <div className="shell">
-          <Reveal className="callout">
+          <Reveal className="callout" surface="panel">
             <div className="callout__icon" aria-hidden="true">
               <Info width={18} height={18} />
             </div>
@@ -64,7 +60,7 @@ export function ExplorePage() {
                 sourced data panel for all eight planets. No API keys, no accounts.
               </p>
             </div>
-            <Link className="btn btn--primary" to="/explore/solar-system">
+            <Link className="btn btn--primary" to="/explore/solar-system" data-lg="primary">
               Open the explorer
               <ArrowRight className="btn__icon" />
             </Link>
