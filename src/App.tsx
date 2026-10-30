@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { SiteHeader } from './components/SiteHeader';
 import { SiteFooter } from './components/SiteFooter';
 import { CursorLight } from './components/CursorLight';
+import { LiquidGlassLayer } from './liquid-glass';
 import { HomePage } from './pages/HomePage';
 import { ExplorePage } from './pages/ExplorePage';
 import { SolarSystemPage } from './pages/SolarSystemPage';
@@ -37,6 +38,11 @@ export function App() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
+
+      {/* WebGL2 liquid glass: the living backdrop, then the page chrome. */}
+      <LiquidGlassLayer layer="base" mode="backdrop" />
+      <LiquidGlassLayer layer="chrome" mode="overlay" />
+
       <CursorLight />
       <div className="noise-overlay" aria-hidden="true" />
       <ScrollManager />

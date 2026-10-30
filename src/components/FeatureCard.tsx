@@ -19,12 +19,14 @@ export function FeatureCard({ feature, highlight = false }: FeatureCardProps) {
           <Icon width={20} height={20} />
         </span>
         {isLive ? (
-          <span className="chip chip--live">
+          <span className="chip chip--live" data-lg="chip">
             <span className="dot" />
             Live
           </span>
         ) : (
-          <span className="chip chip--soon">Coming soon</span>
+          <span className="chip chip--soon" data-lg="chip">
+            Coming soon
+          </span>
         )}
       </div>
 
@@ -53,6 +55,7 @@ export function FeatureCard({ feature, highlight = false }: FeatureCardProps) {
       <Link
         to={feature.href!}
         className={`feature-card${highlight ? ' feature-card--highlight' : ''}`}
+        data-lg="card"
         aria-label={`${feature.title} — open this experience`}
       >
         {inner}
@@ -63,6 +66,7 @@ export function FeatureCard({ feature, highlight = false }: FeatureCardProps) {
   return (
     <article
       className={`feature-card feature-card--soon${highlight ? ' feature-card--highlight' : ''}`}
+      data-lg="card"
       aria-labelledby={`feature-${feature.id}`}
     >
       {inner}

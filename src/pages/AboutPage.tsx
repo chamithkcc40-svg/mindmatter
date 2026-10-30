@@ -30,10 +30,6 @@ export function AboutPage() {
 
   return (
     <div className="page">
-      <div className="page__ambient" aria-hidden="true">
-        <div className="page__nebula" />
-      </div>
-
       <section className="page-hero">
         <div className="shell">
           <Reveal>
@@ -92,7 +88,7 @@ export function AboutPage() {
             </h2>
           </Reveal>
 
-          <ol className="about__approach">
+          <ol className="about__approach" data-lg="panel">
             {APPROACH.map((item, index) => (
               <Reveal as="li" key={item.title} delay={index * 80}>
                 <span className="about__approach-index">{String(index + 1).padStart(2, '0')}</span>
@@ -118,21 +114,21 @@ export function AboutPage() {
               slowed and compressed for observation. Positions are generated locally
               and are not an ephemeris.
             </p>
-            <div className="about__note">
+            <div className="about__note" data-lg="row">
               <Info width={16} height={16} />
               <p>
                 No live astronomy API is connected. The word “Live” in “Live Solar
                 System” describes continuous motion, not real-time telemetry.
               </p>
             </div>
-            <Link className="btn btn--primary" to="/explore/solar-system">
+            <Link className="btn btn--primary" to="/explore/solar-system" data-lg="primary">
               See it for yourself
               <ArrowRight className="btn__icon" />
             </Link>
           </Reveal>
 
           <Reveal delay={100} className="about__specs">
-            <dl>
+            <dl data-lg="panel">
               {BUILD_NOTES.map(([label, value]) => (
                 <div key={label}>
                   <dt>{label}</dt>

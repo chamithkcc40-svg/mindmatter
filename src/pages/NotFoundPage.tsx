@@ -15,11 +15,11 @@ export function NotFoundPage() {
           been discovered yet.
         </p>
         <div className="notfound__actions">
-          <Link className="btn btn--primary" to="/">
+          <Link className="btn btn--primary" to="/" data-lg="primary">
             <ArrowLeft className="btn__icon" />
             Back to Mind Matter
           </Link>
-          <Link className="btn btn--ghost" to="/explore/solar-system">
+          <Link className="btn btn--ghost" to="/explore/solar-system" data-lg="button">
             Explore the solar system
             <ArrowRight className="btn__icon" />
           </Link>

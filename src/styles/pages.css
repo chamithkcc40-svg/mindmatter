@@ -9,31 +9,6 @@
   isolation: isolate;
 }
 
-.page__ambient {
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 720px;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(80% 60% at 78% -10%, rgba(40, 70, 140, 0.4), transparent 62%),
-    radial-gradient(60% 50% at 8% 10%, rgba(86, 66, 156, 0.22), transparent 66%);
-}
-
-.page__nebula {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(
-    circle,
-    rgba(210, 230, 255, 0.5) 0 0.7px,
-    transparent 1.3px
-  );
-  background-size: 197px 173px;
-  opacity: 0.28;
-  mask-image: linear-gradient(180deg, #000, transparent 78%);
-  -webkit-mask-image: linear-gradient(180deg, #000, transparent 78%);
-}
-
 .page-hero {
   position: relative;
   padding-block: clamp(3rem, 7vw, 6rem) clamp(1.5rem, 3vw, 2.5rem);
@@ -57,11 +32,9 @@
   gap: 1.25rem;
   flex-wrap: wrap;
   padding: clamp(1.2rem, 2.5vw, 1.75rem);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background:
-    radial-gradient(ellipse 60% 140% at 12% 0%, rgba(70, 120, 230, 0.18), transparent 62%),
-    rgba(9, 15, 27, 0.7);
+  border: 1px solid transparent;
+  border-radius: var(--lg-r-panel);
+  background: none;
 }
 
 .callout__icon {
@@ -92,10 +65,10 @@
 /* Data table ------------------------------------------------------------- */
 
 .table-wrap {
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
+  border: 1px solid transparent;
+  border-radius: var(--lg-r-panel);
   overflow-x: auto;
-  background: linear-gradient(180deg, rgba(11, 17, 31, 0.7), rgba(7, 11, 21, 0.7));
+  background: none;
   scrollbar-width: thin;
 }
 
@@ -129,9 +102,10 @@
   font-weight: 620;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-dim);
-  background: rgba(8, 13, 24, 0.96);
-  backdrop-filter: blur(8px);
+  color: var(--ink-muted);
+  /* the glass pane is the surface; the header only needs a scrim so scrolled
+     rows cannot bleed through it */
+  background: rgba(7, 11, 21, 0.92);
   white-space: nowrap;
   border-bottom-color: var(--line);
 }
@@ -198,9 +172,9 @@
   display: flex;
   gap: 1.1rem;
   padding: clamp(1.25rem, 2.5vw, 1.75rem);
-  border: 1px dashed rgba(148, 176, 226, 0.24);
-  border-radius: var(--radius-lg);
-  background: rgba(8, 13, 24, 0.5);
+  border: 1px solid transparent;
+  border-radius: var(--lg-r-panel);
+  background: none;
 }
 
 .coming-panel__icon {
@@ -248,9 +222,9 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
+  background: rgba(148, 176, 226, 0.14);
+  border: 1px solid rgba(148, 176, 226, 0.14);
+  border-radius: var(--lg-r-panel);
   overflow: hidden;
 }
 
@@ -259,7 +233,7 @@
   gap: 0.6rem;
   align-content: start;
   padding: clamp(1.25rem, 2.4vw, 1.75rem);
-  background: rgba(9, 14, 26, 0.85);
+  background: rgba(6, 10, 20, 0.45);
 }
 
 .about__approach-index {
@@ -296,10 +270,11 @@
 .about__note {
   display: flex;
   gap: 0.65rem;
-  padding: 0.85rem 1rem;
-  border: 1px solid rgba(95, 228, 255, 0.18);
-  border-radius: var(--radius-md);
-  background: rgba(30, 90, 120, 0.1);
+  padding: 0.95rem 1.1rem;
+  border: 1px solid transparent;
+  border-radius: var(--lg-r-row);
+  background: none;
+  box-shadow: inset 2px 0 0 rgba(95, 228, 255, 0.55);
   font-size: 0.84rem;
   line-height: 1.6;
   color: var(--ink-2);
@@ -314,8 +289,8 @@
 
 .about__specs dl {
   display: grid;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  border-radius: var(--lg-r-panel);
   overflow: hidden;
 }
 
@@ -324,8 +299,8 @@
   grid-template-columns: 100px 1fr;
   gap: 1rem;
   padding: 0.95rem 1rem;
-  background: rgba(9, 14, 26, 0.7);
-  border-bottom: 1px solid rgba(148, 176, 226, 0.09);
+  background: none;
+  border-bottom: 1px solid rgba(148, 176, 226, 0.1);
 }
 
 .about__specs dl > div:last-child {

@@ -38,13 +38,22 @@ export function SimulationControls({
   onSelect,
 }: SimulationControlsProps) {
   return (
-    <div className="sim-controls" role="group" aria-label="Simulation controls">
+    <div
+      className="sim-controls"
+      role="group"
+      aria-label="Simulation controls"
+      data-lg="panel"
+      data-lg-layer="stage"
+      data-lg-radius="20"
+    >
       <div className="sim-controls__cluster">
         <button
           type="button"
           className="sim-btn sim-btn--primary"
           onClick={onTogglePause}
           aria-pressed={paused}
+          data-lg="primary"
+          data-lg-layer="stage"
         >
           {paused ? <Play width={16} height={16} /> : <Pause width={16} height={16} />}
           <span>{paused ? 'Play' : 'Pause'}</span>
@@ -78,6 +87,8 @@ export function SimulationControls({
             onClick={onZoomOut}
             disabled={!canZoomOut}
             aria-label="Zoom out"
+            data-lg="button"
+            data-lg-layer="stage"
           >
             <Minus width={16} height={16} />
           </button>
@@ -90,12 +101,20 @@ export function SimulationControls({
             onClick={onZoomIn}
             disabled={!canZoomIn}
             aria-label="Zoom in"
+            data-lg="button"
+            data-lg-layer="stage"
           >
             <Plus width={16} height={16} />
           </button>
         </div>
 
-        <button type="button" className="sim-btn" onClick={onReset}>
+        <button
+          type="button"
+          className="sim-btn"
+          onClick={onReset}
+          data-lg="button"
+          data-lg-layer="stage"
+        >
           <Reset width={16} height={16} />
           <span>Reset view</span>
         </button>
@@ -107,6 +126,8 @@ export function SimulationControls({
           className={`planet-chip${selectedId === null ? ' is-active' : ''}`}
           onClick={() => onSelect(null)}
           aria-pressed={selectedId === null}
+          data-lg={selectedId === null ? 'primary' : 'chip'}
+          data-lg-layer="stage"
         >
           <span className="planet-chip__sun" aria-hidden="true" />
           Full system
@@ -118,6 +139,8 @@ export function SimulationControls({
             className={`planet-chip${selectedId === planet.id ? ' is-active' : ''}`}
             onClick={() => onSelect(planet.id)}
             aria-pressed={selectedId === planet.id}
+            data-lg={selectedId === planet.id ? 'primary' : 'chip'}
+            data-lg-layer="stage"
           >
             <span
               className="planet-chip__dot"

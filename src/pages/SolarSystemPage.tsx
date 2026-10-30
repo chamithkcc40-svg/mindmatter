@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { SolarSystemCanvas } from '../features/solar-system/SolarSystemCanvas';
 import { SimulationControls } from '../features/solar-system/SimulationControls';
 import { PlanetPanel } from '../features/solar-system/PlanetPanel';
-import { Starfield } from '../components/visuals/Starfield';
+import { LiquidGlassLayer } from '../liquid-glass';
 import { ArrowLeft, Info } from '../components/icons';
 import { PLANET_BY_ID, type PlanetId } from '../data/planets';
 import { clamp } from '../lib/format';
@@ -99,9 +99,9 @@ export function SolarSystemPage() {
 
   return (
     <div className="explorer">
-      <div className="explorer__bar">
+      <div className="explorer__bar" data-lg="bar">
         <div className="shell explorer__bar-inner">
-          <Link to="/" className="explorer__back">
+          <Link to="/" className="explorer__back" data-lg="chip">
             <ArrowLeft width={16} height={16} />
             Mind Matter
           </Link>
@@ -118,18 +118,14 @@ export function SolarSystemPage() {
               data, or take the controls below.
             </p>
           </div>
-          <span className="chip explorer__bar-chip">Educational simulation</span>
+          <span className="chip explorer__bar-chip" data-lg="chip">
+            Educational simulation
+          </span>
         </div>
       </div>
 
       <div className="explorer__body">
         <section className="explorer__stage" aria-label="Solar system visualisation">
-          <div className="explorer__stage-bg" aria-hidden="true">
-            <Starfield density={1.1} maxStars={lowPower ? 120 : 260} parallax={!lowPower} />
-            <div className="explorer__nebula explorer__nebula--a" />
-            <div className="explorer__nebula explorer__nebula--b" />
-          </div>
-
           <SolarSystemCanvas
             selectedId={selectedId}
             onSelect={selectPlanet}
@@ -144,7 +140,10 @@ export function SolarSystemPage() {
             label={`Simulated solar system. ${selectedPlanet ? `${selectedPlanet.name} is selected.` : 'All eight planets are visible.'} Use the planet buttons for a text description.`}
           />
 
-          <div className="explorer__stage-note">
+          {/* Glass above the simulation artwork, in its own region layer. */}
+          <LiquidGlassLayer layer="stage" mode="region" />
+
+          <div className="explorer__stage-note" data-lg="chip" data-lg-layer="stage">
             <Info width={14} height={14} />
             <span>
               Sizes and distances artistically compressed · orbital motion simulated
@@ -173,6 +172,7 @@ export function SolarSystemPage() {
         <aside
           className={`explorer__panel${selectedPlanet ? ' has-selection' : ''}`}
           aria-label="Planet information"
+          data-lg="panel"
         >
           <div className="explorer__panel-scroll" ref={panelRef}>
             <PlanetPanel
